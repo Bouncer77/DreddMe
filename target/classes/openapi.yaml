@@ -1,0 +1,169 @@
+openapi: 3.0.3
+info:
+  title: Сервис инвентаризации RenovaTech
+  version: 0.0.1
+servers:
+- description: Dev Server
+  url: http://localhost:8080/api/v1
+paths:
+  /tools:
+    get:
+      operationId: getAllTools
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tools'
+          description: Успешный ответ со списком инструментов
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Всё нестандартное
+      summary: Метод получения списка инструментов
+      tags:
+      - Tools
+      x-accepts:
+      - application/json
+      x-tags:
+      - tag: Tools
+    post:
+      operationId: createTool
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tool'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tool'
+          description: Успешный ответ со списком инструментов
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Всё нестандартное
+      summary: Метод создания инструмента
+      tags:
+      - Tools
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+      x-tags:
+      - tag: Tools
+  /tools/{id}:
+    delete:
+      operationId: deleteToolById
+      parameters:
+      - description: Идентификатор инструмента
+        example: 77
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Успешный ответ со списком инструментов
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Всё нестандартное
+      summary: Метод удаления инструмента по идентификатору
+      tags:
+      - Tools
+      x-accepts:
+      - application/json
+      x-tags:
+      - tag: Tools
+    get:
+      operationId: getToolById
+      parameters:
+      - description: Идентификатор инструмента
+        example: 77
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tool'
+          description: Успешный ответ со списком инструментов
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Всё нестандартное
+      summary: Метод получения списка инструментов
+      tags:
+      - Tools
+      x-accepts:
+      - application/json
+      x-tags:
+      - tag: Tools
+components:
+  schemas:
+    Tool:
+      example:
+        name: Шуруповерт
+        tool_id: 77
+        create_date: create_date
+        status: new
+      properties:
+        tool_id:
+          example: 77
+          type: integer
+        name:
+          example: Шуруповерт
+          type: string
+        status:
+          description: Состояние инструмента
+          enum:
+          - new
+          - old
+          - broken
+          type: string
+        create_date:
+          format: 2022-07-01T15:00:00+03
+          type: string
+      required:
+      - name
+      - status
+      type: object
+    Tools:
+      items:
+        $ref: '#/components/schemas/Tool'
+      type: array
+    Error:
+      example:
+        code: 0
+        message: message
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+      required:
+      - code
+      - message
+      type: object
