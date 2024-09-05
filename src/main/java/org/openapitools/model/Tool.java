@@ -1,23 +1,14 @@
 package org.openapitools.model;
 
-import java.net.URI;
-import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.time.OffsetDateTime;
-import javax.persistence.*;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
-import io.swagger.v3.oas.annotations.media.Schema;
 
-
-import java.util.*;
 import javax.annotation.Generated;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 /**
  * Tool
@@ -30,190 +21,134 @@ import javax.annotation.Generated;
 @AllArgsConstructor
 public class Tool {
 
-  @Id
-  @Column(name = "id")
-  // @GeneratedValue
-  private Integer toolId;
+    @Id
+    @Column(name = "id")
+    @GeneratedValue
+    private Long toolId;
 
-  @Column(name = "name")
-  private String name;
+    @Column(name = "name")
+    private String name;
 
-  /**
-   * Состояние инструмента
-   */
-  public enum StatusEnum {
-    NEW("new"),
-    
-    OLD("old"),
-    
-    BROKEN("broken");
+    /**
+     * Состояние инструмента
+     */
+    @Column(name = "status")
+    private String status;
 
-    @Column(name = "value")
-    private String value;
-
-    StatusEnum(String value) {
-      this.value = value;
+    public Tool() {
+        super();
     }
 
-    @JsonValue
-    public String getValue() {
-      return value;
+    /**
+     * Constructor with only required parameters
+     */
+    public Tool(String name, String status) {
+        this.name = name;
+        this.status = status;
+    }
+
+    public Tool toolId(Long toolId) {
+        this.toolId = toolId;
+        return this;
+    }
+
+    /**
+     * Get toolId
+     *
+     * @return toolId
+     */
+
+    @Schema(name = "tool_id", example = "77", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+    @JsonProperty("tool_id")
+    public Long getToolId() {
+        return toolId;
+    }
+
+    public void setToolId(Long toolId) {
+        this.toolId = toolId;
+    }
+
+    public Tool name(String name) {
+        this.name = name;
+        return this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return name
+     */
+    @NotNull
+    @Schema(name = "name", example = "Шуруповерт", requiredMode = Schema.RequiredMode.REQUIRED)
+    @JsonProperty("name")
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Tool status(String status) {
+        this.status = status;
+        return this;
+    }
+
+    /**
+     * Состояние инструмента
+     *
+     * @return status
+     */
+    @NotNull
+    @Schema(name = "status", description = "Состояние инструмента", requiredMode = Schema.RequiredMode.REQUIRED)
+    @JsonProperty("status")
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Tool tool = (Tool) o;
+        return Objects.equals(this.name, tool.name) &&
+                Objects.equals(this.status, tool.status);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, status);
     }
 
     @Override
     public String toString() {
-      return String.valueOf(value);
+        StringBuilder sb = new StringBuilder();
+        sb.append("class Tool {\n");
+        sb.append("    toolId: ").append(toIndentedString(toolId)).append("\n");
+        sb.append("    name: ").append(toIndentedString(name)).append("\n");
+        sb.append("    status: ").append(toIndentedString(status)).append("\n");
+        sb.append("}");
+        return sb.toString();
     }
 
-    @JsonCreator
-    public static StatusEnum fromValue(String value) {
-      for (StatusEnum b : StatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
+    /**
+     * Convert the given object to string with each line indented by 4 spaces
+     * (except the first line).
+     */
+    private String toIndentedString(Object o) {
+        if (o == null) {
+            return "null";
         }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+        return o.toString().replace("\n", "\n    ");
     }
-  }
-
-  private StatusEnum status;
-
-  @Column(name = "create_date")
-  private String createDate;
-
-  public Tool() {
-    super();
-  }
-
-  /**
-   * Constructor with only required parameters
-   */
-  public Tool(String name, StatusEnum status) {
-    this.name = name;
-    this.status = status;
-  }
-
-  public Tool toolId(Integer toolId) {
-    this.toolId = toolId;
-    return this;
-  }
-
-  /**
-   * Get toolId
-   * @return toolId
-   */
-  
-  @Schema(name = "tool_id", example = "77", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("tool_id")
-  public Integer getToolId() {
-    return toolId;
-  }
-
-  public void setToolId(Integer toolId) {
-    this.toolId = toolId;
-  }
-
-  public Tool name(String name) {
-    this.name = name;
-    return this;
-  }
-
-  /**
-   * Get name
-   * @return name
-   */
-  @NotNull 
-  @Schema(name = "name", example = "Шуруповерт", requiredMode = Schema.RequiredMode.REQUIRED)
-  @JsonProperty("name")
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public Tool status(StatusEnum status) {
-    this.status = status;
-    return this;
-  }
-
-  /**
-   * Состояние инструмента
-   * @return status
-   */
-  @NotNull 
-  @Schema(name = "status", description = "Состояние инструмента", requiredMode = Schema.RequiredMode.REQUIRED)
-  @JsonProperty("status")
-  public StatusEnum getStatus() {
-    return status;
-  }
-
-  public void setStatus(StatusEnum status) {
-    this.status = status;
-  }
-
-  public Tool createDate(String createDate) {
-    this.createDate = createDate;
-    return this;
-  }
-
-  /**
-   * Get createDate
-   * @return createDate
-   */
-  
-  @Schema(name = "create_date", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("create_date")
-  public String getCreateDate() {
-    return createDate;
-  }
-
-  public void setCreateDate(String createDate) {
-    this.createDate = createDate;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    Tool tool = (Tool) o;
-    return Objects.equals(this.toolId, tool.toolId) &&
-        Objects.equals(this.name, tool.name) &&
-        Objects.equals(this.status, tool.status) &&
-        Objects.equals(this.createDate, tool.createDate);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(toolId, name, status, createDate);
-  }
-
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class Tool {\n");
-    sb.append("    toolId: ").append(toIndentedString(toolId)).append("\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    status: ").append(toIndentedString(status)).append("\n");
-    sb.append("    createDate: ").append(toIndentedString(createDate)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
-
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
-  }
 }
 

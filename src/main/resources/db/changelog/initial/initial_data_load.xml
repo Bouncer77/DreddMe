@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="init_data" author="Kosenkov Ivan">
+        <sqlFile path="db/changelog/initial/data/init_data.sql" relativeToChangelogFile="false"/>
+        <comment>
+            Загрузка тестовых данных в таблицу weapon
+        </comment>
+
+    </changeSet>
+</databaseChangeLog>

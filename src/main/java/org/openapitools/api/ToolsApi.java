@@ -18,6 +18,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import org.openapitools.repository.ToolRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import javax.validation.constraints.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -48,7 +50,7 @@ public interface ToolsApi {
      * @param tool  (required)
      * @return Успешный ответ со списком инструментов (status code 200)
      *         or Всё нестандартное (status code 200)
-     */
+     *//*
     @Operation(
         operationId = "createTool",
         summary = "Метод создания инструмента",
@@ -91,13 +93,13 @@ public interface ToolsApi {
     }
 
 
-    /**
+    *//**
      * DELETE /tools/{id} : Метод удаления инструмента по идентификатору
      *
      * @param id Идентификатор инструмента (required)
      * @return Успешный ответ со списком инструментов (status code 200)
      *         or Всё нестандартное (status code 200)
-     */
+     *//*
     @Operation(
         operationId = "deleteToolById",
         summary = "Метод удаления инструмента по идентификатору",
@@ -116,7 +118,7 @@ public interface ToolsApi {
     )
     
     default ResponseEntity<Void> deleteToolById(
-        @Parameter(name = "id", description = "Идентификатор инструмента", required = true, in = ParameterIn.PATH) @PathVariable("id") Integer id
+        @Parameter(name = "id", description = "Идентификатор инструмента", required = true, in = ParameterIn.PATH) @PathVariable("id") Long id
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
@@ -129,7 +131,7 @@ public interface ToolsApi {
         });
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
-    }
+    }*/
 
 
     /**
@@ -157,13 +159,13 @@ public interface ToolsApi {
         produces = { "application/json" }
     )
     
-    default ResponseEntity<List<Tool>> getAllTools(
+    default List<Tool> getAllTools(
         
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "[ { \"name\" : \"Шуруповерт\", \"tool_id\" : 77, \"create_date\" : \"create_date\", \"status\" : \"new\" }, { \"name\" : \"Шуруповерт\", \"tool_id\" : 77, \"create_date\" : \"create_date\", \"status\" : \"new\" } ]";
+                    String exampleString = "[ { \"name\" : \"Шуруповерт\", \"tool_id\" : 77, \"status\" : \"new\" }]";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -174,7 +176,7 @@ public interface ToolsApi {
                 }
             }
         });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        return new ArrayList<>();
 
     }
 
@@ -205,13 +207,13 @@ public interface ToolsApi {
         produces = { "application/json" }
     )
     
-    default ResponseEntity<Tool> getToolById(
-        @Parameter(name = "id", description = "Идентификатор инструмента", required = true, in = ParameterIn.PATH) @PathVariable("id") Integer id
+    default Tool getToolById(
+        @Parameter(name = "id", description = "Идентификатор инструмента", required = true, in = ParameterIn.PATH) @PathVariable("id") Long id
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"name\" : \"Шуруповерт\", \"tool_id\" : 77, \"create_date\" : \"create_date\", \"status\" : \"new\" }";
+                    String exampleString = "{ \"name\" : \"Шуруповерт\", \"tool_id\" : 77, \"status\" : \"new\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -222,7 +224,7 @@ public interface ToolsApi {
                 }
             }
         });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        return null;
 
     }
 
