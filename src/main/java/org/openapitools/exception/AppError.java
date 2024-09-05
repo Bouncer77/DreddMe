@@ -1,15 +1,15 @@
 package org.openapitools.exception;
 
 public class AppError {
-    private int statusCode;
+    private int code;
     private String message;
 
-    public int getStatusCode() {
-        return statusCode;
+    public int getCode() {
+        return code;
     }
 
-    public void setStatusCode(int statusCode) {
-        this.statusCode = statusCode;
+    public void setCode(int code) {
+        this.code = code;
     }
 
     public String getMessage() {
@@ -24,7 +24,7 @@ public class AppError {
     }
 
     public AppError(int statusCode, String message) {
-        this.statusCode = statusCode;
+        this.code = statusCode;
         this.message = message;
     }
 }

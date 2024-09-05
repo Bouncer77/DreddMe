@@ -1,0 +1,216 @@
+C:\Projects\Kosenkov\8_DreddMe\src\main\resources>dredd tool.yml http://127.0.0.1:8080
+(node:11792) Warning: Accessing non-existent property 'padLevels' of module exports inside circular dependency
+(Use `node --trace-warnings ...` to show where the warning was created)
+warn: API description parser warning in C:\Projects\Kosenkov\8_DreddMe\src\main\resources\tool.yml:26 (from line 26 column 7 to column 11): 'Operation Object' contains unsupported key 'tags' (2 occurances)
+warn: API description parser warning in C:\Projects\Kosenkov\8_DreddMe\src\main\resources\tool.yml:45 (from line 45 column 9 to column 14): 'Parameter Object' contains unsupported key 'style'
+warn: API description parser warning in C:\Projects\Kosenkov\8_DreddMe\src\main\resources\tool.yml:89 (from line 89 column 11 to column 17): 'Schema Object' contains unsupported key 'format'
+warn: API description parser warning in C:\Projects\Kosenkov\8_DreddMe\src\main\resources\tool.yml:89 (from line 89 column 19 to column 41): Interpreting YAML !!timestamp as string
+fail: GET (200) /tools duration: 50ms
+fail: GET (200) /tools duration: 10ms
+fail: GET (200) /tools/77 duration: 8ms
+fail: GET (200) /tools/77 duration: 8ms
+info: Displaying failed tests...
+fail: GET (200) /tools duration: 50ms
+fail: body: At '' Invalid type: object (expected array)
+statusCode: Expected status code '200', but got '404'.
+
+request:
+method: GET
+uri: /tools
+headers:
+    Accept: application/json
+    User-Agent: Dredd/14.1.0 (Windows_NT 10.0.19045; x64)
+
+body:
+
+
+
+expected:
+headers:
+    Content-Type: application/json
+
+body:
+[
+  {
+    "name": "Шуруповерт",
+    "tool_id": 77,
+    "create_date": "create_date",
+    "status": "new"
+  }
+]
+statusCode: 200
+
+
+actual:
+statusCode: 404
+headers:
+    vary: Origin, Access-Control-Request-Method, Access-Control-Request-Headers
+    content-type: application/json
+    transfer-encoding: chunked
+    date: Thu, 05 Sep 2024 10:09:24 GMT
+    keep-alive: timeout=60
+    connection: keep-alive
+
+bodyEncoding: utf-8
+body:
+{
+  "timestamp": "2024-09-05T10:09:24.137+00:00",
+  "status": 404,
+  "error": "Not Found",
+  "path": "/tools"
+}
+
+
+
+fail: GET (200) /tools duration: 10ms
+fail: body: At '/code' Missing required property: code
+body: At '/message' Missing required property: message
+statusCode: Expected status code '200', but got '404'.
+
+request:
+method: GET
+uri: /tools
+headers:
+    Accept: application/json
+    User-Agent: Dredd/14.1.0 (Windows_NT 10.0.19045; x64)
+
+body:
+
+
+
+expected:
+headers:
+    Content-Type: application/json
+
+body:
+{
+  "code": 0,
+  "message": "message"
+}
+statusCode: 200
+
+
+actual:
+statusCode: 404
+headers:
+    vary: Origin, Access-Control-Request-Method, Access-Control-Request-Headers
+    content-type: application/json
+    transfer-encoding: chunked
+    date: Thu, 05 Sep 2024 10:09:24 GMT
+    keep-alive: timeout=60
+    connection: keep-alive
+
+bodyEncoding: utf-8
+body:
+{
+  "timestamp": "2024-09-05T10:09:24.180+00:00",
+  "status": 404,
+  "error": "Not Found",
+  "path": "/tools"
+}
+
+
+
+fail: GET (200) /tools/77 duration: 8ms
+fail: body: At '/name' Missing required property: name
+body: At '/tool_id' Missing required property: tool_id
+body: At '/create_date' Missing required property: create_date
+statusCode: Expected status code '200', but got '404'.
+
+request:
+method: GET
+uri: /tools/77
+headers:
+    Accept: application/json
+    User-Agent: Dredd/14.1.0 (Windows_NT 10.0.19045; x64)
+
+body:
+
+
+
+expected:
+headers:
+    Content-Type: application/json
+
+body:
+{
+  "name": "Шуруповерт",
+  "tool_id": 77,
+  "create_date": "create_date",
+  "status": "new"
+}
+statusCode: 200
+
+
+actual:
+statusCode: 404
+headers:
+    vary: Origin, Access-Control-Request-Method, Access-Control-Request-Headers
+    content-type: application/json
+    transfer-encoding: chunked
+    date: Thu, 05 Sep 2024 10:09:24 GMT
+    keep-alive: timeout=60
+    connection: keep-alive
+
+bodyEncoding: utf-8
+body:
+{
+  "timestamp": "2024-09-05T10:09:24.189+00:00",
+  "status": 404,
+  "error": "Not Found",
+  "path": "/tools/77"
+}
+
+
+
+fail: GET (200) /tools/77 duration: 8ms
+fail: body: At '/code' Missing required property: code
+body: At '/message' Missing required property: message
+statusCode: Expected status code '200', but got '404'.
+
+request:
+method: GET
+uri: /tools/77
+headers:
+    Accept: application/json
+    User-Agent: Dredd/14.1.0 (Windows_NT 10.0.19045; x64)
+
+body:
+
+
+
+expected:
+headers:
+    Content-Type: application/json
+
+body:
+{
+  "code": 0,
+  "message": "message"
+}
+statusCode: 200
+
+
+actual:
+statusCode: 404
+headers:
+    vary: Origin, Access-Control-Request-Method, Access-Control-Request-Headers
+    content-type: application/json
+    transfer-encoding: chunked
+    date: Thu, 05 Sep 2024 10:09:24 GMT
+    keep-alive: timeout=60
+    connection: keep-alive
+
+bodyEncoding: utf-8
+body:
+{
+  "timestamp": "2024-09-05T10:09:24.197+00:00",
+  "status": 404,
+  "error": "Not Found",
+  "path": "/tools/77"
+}
+
+
+
+complete: 0 passing, 4 failing, 0 errors, 0 skipped, 4 total
+complete: Tests took 78ms

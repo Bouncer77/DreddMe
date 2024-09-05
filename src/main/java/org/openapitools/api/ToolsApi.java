@@ -7,31 +7,22 @@ package org.openapitools.api;
 
 import org.openapitools.model.Error;
 import org.openapitools.model.Tool;
-import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
-import org.openapitools.repository.ToolRepository;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.NativeWebRequest;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.Valid;
-import javax.validation.constraints.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
@@ -43,97 +34,6 @@ public interface ToolsApi {
     default Optional<NativeWebRequest> getRequest() {
         return Optional.empty();
     }
-
-    /**
-     * POST /tools : Метод создания инструмента
-     *
-     * @param tool  (required)
-     * @return Успешный ответ со списком инструментов (status code 200)
-     *         or Всё нестандартное (status code 200)
-     *//*
-    @Operation(
-        operationId = "createTool",
-        summary = "Метод создания инструмента",
-        tags = { "Tools" },
-        responses = {
-            @ApiResponse(responseCode = "200", description = "Успешный ответ со списком инструментов", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = Tool.class))
-            }),
-            @ApiResponse(responseCode = "default", description = "Всё нестандартное", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))
-            })
-        }
-    )
-    @RequestMapping(
-        method = RequestMethod.POST,
-        value = "/tools",
-        produces = { "application/json" },
-        consumes = { "application/json" }
-    )
-    
-    default ResponseEntity<Tool> createTool(
-        @Parameter(name = "Tool", description = "", required = true) @Valid @RequestBody Tool tool
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"name\" : \"Шуруповерт\", \"tool_id\" : 77, \"create_date\" : \"create_date\", \"status\" : \"new\" }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"code\" : 0, \"message\" : \"message\" }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
-
-
-    *//**
-     * DELETE /tools/{id} : Метод удаления инструмента по идентификатору
-     *
-     * @param id Идентификатор инструмента (required)
-     * @return Успешный ответ со списком инструментов (status code 200)
-     *         or Всё нестандартное (status code 200)
-     *//*
-    @Operation(
-        operationId = "deleteToolById",
-        summary = "Метод удаления инструмента по идентификатору",
-        tags = { "Tools" },
-        responses = {
-            @ApiResponse(responseCode = "200", description = "Успешный ответ со списком инструментов"),
-            @ApiResponse(responseCode = "default", description = "Всё нестандартное", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))
-            })
-        }
-    )
-    @RequestMapping(
-        method = RequestMethod.DELETE,
-        value = "/tools/{id}",
-        produces = { "application/json" }
-    )
-    
-    default ResponseEntity<Void> deleteToolById(
-        @Parameter(name = "id", description = "Идентификатор инструмента", required = true, in = ParameterIn.PATH) @PathVariable("id") Long id
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"code\" : 0, \"message\" : \"message\" }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }*/
-
-
     /**
      * GET /tools : Метод получения списка инструментов
      *
@@ -147,9 +47,6 @@ public interface ToolsApi {
         responses = {
             @ApiResponse(responseCode = "200", description = "Успешный ответ со списком инструментов", content = {
                 @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Tool.class)))
-            }),
-            @ApiResponse(responseCode = "default", description = "Всё нестандартное", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))
             })
         }
     )
@@ -165,12 +62,7 @@ public interface ToolsApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "[ { \"name\" : \"Шуруповерт\", \"tool_id\" : 77, \"status\" : \"new\" }]";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"code\" : 0, \"message\" : \"message\" }";
+                    String exampleString = "[ { \"name\" : \"Шуруповерт\", \"tool_id\" : 1, \"status\" : \"new\" }]";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -182,9 +74,9 @@ public interface ToolsApi {
 
 
     /**
-     * GET /tools/{id} : Метод получения списка инструментов
+     * GET /tools/{toolId} : Метод получения списка инструментов
      *
-     * @param id Идентификатор инструмента (required)
+     * @param toolId Идентификатор инструмента (required)
      * @return Успешный ответ со списком инструментов (status code 200)
      *         or Всё нестандартное (status code 200)
      */
@@ -195,30 +87,22 @@ public interface ToolsApi {
         responses = {
             @ApiResponse(responseCode = "200", description = "Успешный ответ со списком инструментов", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = Tool.class))
-            }),
-            @ApiResponse(responseCode = "default", description = "Всё нестандартное", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))
             })
         }
     )
     @RequestMapping(
         method = RequestMethod.GET,
-        value = "/tools/{id}",
+        value = "/tools/{tool_id}",
         produces = { "application/json" }
     )
     
     default Tool getToolById(
-        @Parameter(name = "id", description = "Идентификатор инструмента", required = true, in = ParameterIn.PATH) @PathVariable("id") Long id
+        @Parameter(name = "tool_id", description = "Идентификатор инструмента", required = true, in = ParameterIn.PATH) @PathVariable("tool_id") Long toolId
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
                     String exampleString = "{ \"name\" : \"Шуруповерт\", \"tool_id\" : 77, \"status\" : \"new\" }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"code\" : 0, \"message\" : \"message\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }

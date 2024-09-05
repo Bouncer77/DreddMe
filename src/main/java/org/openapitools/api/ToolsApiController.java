@@ -28,19 +28,14 @@ public class ToolsApiController implements ToolsApi {
     private final ToolRepository toolRepository;
 
     @Override
-    public Optional<NativeWebRequest> getRequest() {
-        return Optional.ofNullable(request);
-    }
-
-    @Override
     public List<Tool> getAllTools() {
         return toolRepository.findAll();
     }
 
     @Override
-    public Tool getToolById(Long id) {
-        return toolRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("Product with id " + id + " not found"));
+    public Tool getToolById(Long toolId) {
+        return toolRepository.findById(toolId).orElseThrow(
+                () -> new ResourceNotFoundException("Product with id " + toolId + " not found"));
     }
 
 }
