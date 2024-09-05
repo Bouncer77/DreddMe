@@ -5,8 +5,12 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
+import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -20,10 +24,18 @@ import javax.annotation.Generated;
  */
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-09-04T22:08:42.480945392Z[Etc/UTC]", comments = "Generator version: 7.9.0-SNAPSHOT")
+@Entity
+@Table(name = "tool")
+@Data
+@AllArgsConstructor
 public class Tool {
 
+  @Id
+  @Column(name = "id")
+  // @GeneratedValue
   private Integer toolId;
 
+  @Column(name = "name")
   private String name;
 
   /**
@@ -36,6 +48,7 @@ public class Tool {
     
     BROKEN("broken");
 
+    @Column(name = "value")
     private String value;
 
     StatusEnum(String value) {
@@ -65,6 +78,7 @@ public class Tool {
 
   private StatusEnum status;
 
+  @Column(name = "create_date")
   private String createDate;
 
   public Tool() {

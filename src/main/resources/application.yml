@@ -1,0 +1,14 @@
+spring:
+    jackson:
+        date-format=org:
+            openapitools: RFC3339DateFormat
+        serialization:
+            WRITE_DATES_AS_TIMESTAMPS: false
+    datasource:
+        driverClassName: org.postgresql.Driver
+        username: postgres
+        password: password
+        url: jdbc:postgresql://localhost:5432/dreedme_db
+    jpa:
+        hibernate:
+            ddl-auto: create
